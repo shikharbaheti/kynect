@@ -4,30 +4,32 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  // Link
 } from "react-router-dom";
 
 import NavBar from './components/Navbar/Navbar';
 import Landing from './components/Landing/Landing';
 import Login from './components/Login/Login';
+import Register from './components/Register/Register';
+import ErrorPage from './components/ErrorPage/ErrorPage';
 
 function App() {
   return (
     <div className="App">
       <NavBar />
-      {/* <Landing /> */}
-      {/* <Login /> */}
       <Router>
         <div>
-          {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
           <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/">
+            <Route exact path="/">
               <Landing />
             </Route>
+            <Route exact path="/register">
+              <Register />
+            </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Route component={ErrorPage} />
           </Switch>
         </div>
       </Router>
