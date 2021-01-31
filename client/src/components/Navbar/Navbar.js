@@ -1,8 +1,9 @@
 import { Navbar, Nav } from "react-bootstrap";
+import './Navbar.css';
 
 function NavBar() {
     return (
-        <div className="Navbar">
+        <div className="Navbar fluid">
             <Navbar bg="dark" variant="dark">
                 <Navbar.Brand href="/">Kynect</Navbar.Brand>
                 <Nav className="mr-auto">

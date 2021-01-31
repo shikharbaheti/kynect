@@ -7,11 +7,17 @@ import {
   // Link
 } from "react-router-dom";
 
+import './App.css';
+
+
+import { Container } from "react-bootstrap";
+
 import NavBar from './components/Navbar/Navbar';
 import Landing from './components/Landing/Landing';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import ErrorPage from './components/ErrorPage/ErrorPage';
+import CareerPath from './components/CareerPath/CareerPath';
 
 function App() {
   return (
@@ -29,8 +35,11 @@ function App() {
             <Route exact path="/login">
               <Login />
             </Route>
+            <Route exact path="/careerpath">
+              <CareerPath />
+            </Route>
             <Route component={ErrorPage} />
-          </Switch>``
+          </Switch>
         </div>
       </Router>
     </div>
