@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import signInWithGoogle from '../../firebase';
 
 function Copyright() {
     return (
@@ -92,9 +93,12 @@ export default function SignIn() {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-                    >
+                        >
                         Sign In
           </Button>
+          <Button type="button" fullWidth variant="contained" onClick = {signInWithGoogle} color="secondary">
+  Sign In with google
+</Button>
                     <Grid container>
                         <Grid item xs>
                             <Link href="#" variant="body2">

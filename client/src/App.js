@@ -38,7 +38,7 @@ function App() {
               <Login />
             </Route>
             <Route component={ErrorPage} />
-          </Switch>``
+          </Switch>
         </div>
       </Router>
     </div>
