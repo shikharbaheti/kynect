@@ -21,15 +21,15 @@ def education(education_list):
     #   education_list = [[degree achieved, years of study, institution of study, where it's located], [...], ...]
     #   \CVSubheading % Example
     #   {Degree Achieved | Major (Optional)}{Years of Study}
-    #   {Institution of Study}{Where it is located}
+    #   {Institution of Study}{GPA}{City}{State}
 
     latex = r'''\section{Education} 
              \CVSubHeadingListStart'''
     for entry in education_list:
         latex += r'''
             \CVSubheading
-            {{''' + entry[0] + '''}}{'''+ entry [1] + ''' } 
-            {''' + entry[2] + ''' }{'''+ entry[3]+'''}'''
+            {{''' + entry.get('degree') +r'''}}{'''+ entry.get('dates') + ''' }
+            {''' + entry.get('institution') + ''' $|$ GPA: ''' +entry.get('gpa')+'''}{'''+ entry.get('city')+','+entry.get('state')+'''}'''
 
     latex += r'''\CVSubHeadingListEnd'''
     return latex
@@ -37,30 +37,27 @@ def education(education_list):
 def work_experience(work_exp_list):
     latex = r'''\section{Work Experience} 
             \CVSubHeadingListStart'''
-    #    \CVSubheading %Example
-    #      {What you did}{When you worked there}
-    #      {Who you worked for}{Where they are located}
-    #      \CVItemListStart
-    #        \CVItem{Why it is important to this employer}
-    #      \CVItemListEnd
+    
     for entry in work_exp_list:
         latex += r'''\CVSubheading 
-            {'''+entry[0] +'}{'+entry[1]+r'''} 
-            {'''+ entry[2]+'}{'+entry[3]+'''} 
+            {'''+entry.get('title') +'}{'+entry.get('dates')+r'''} 
+            {'''+ entry.get('company')+'}{'+entry.get('location')+r'''} 
             \CVItemListStart'''
-        for i in range(3):
-            latex += r'''\CVItem{'''+entry[i]+r'''}'''
-        latex += '\CVItemListEnd \CVSubHeadingListEnd'
+        for responsibility in entry.get('responsibilities').split(','):
+            latex += r'''\CVItem{'''+responsibility+r'''}'''
+        latex += r'\CVItemListEnd'
+
+    latex += r'\CVSubHeadingListEnd'
 
     return latex
 
-def skills(skills_map):
+def skills(skills):
     latex = r'''\section{Skills}
     \begin{itemize}[leftmargin=0.5cm, label={}]
     \small{\item{
     '''
-    for key in skills_map.keys():
-        latex += r'\textbf{'+key+'}{:' + skills_map.get(key) + r'} \\'
+    for skill in skills:
+        latex += r'{' + skill + r'} \\'
 
     latex += r'''}}
     \end{itemize}'''
@@ -183,10 +180,11 @@ def build_latex():
         \begin{document}
 
         ''')
-        tex_file.write(header({'name': 'Leah Tomotaki', 'phone_number':'214-471-9565', 'email':'leah.tomotaki@tamu.edu', 'linkedin': 'linkedin', 'address': '123 address st., College Station, TX, 77840'}))
-        tex_file.write(education([['Bachelors of Science', '2018-2022', 'Texas AM University', 'College Station', 'Computer Science']]))
-        tex_file.write(work_experience([['Job Title', 'Time-Time', 'Company', 'Location', 'Responsibility 1', 'Responsibility 2', 'Responsibility 3']]))
-        tex_file.write(skills({'skill 1': 'details about skill 1', 'skill 2': 'details about skill 2'}))
+        tex_file.write(header({'name': 'Name', 'phone_number':'123-456-7890', 'email':'email@tamu.edu', 'linkedin': 'linkedin', 'address': '123 address st., College Station, TX, 77840'}))
+        tex_file.write(education([{'degree':'Bachelors of Science | Computer Science', 'dates':'2018-2022', 'institution':'Texas AM University', 'city':'College Station', 'state': 'TX', 'gpa': '0.0'}]))
+        tex_file.write(work_experience([{'title':'Job Title', 'dates':'Time-Time', 'company':'Company', 'location':'Location', 'responsibilities':'Responsibility 1, Responsibility 2, Responsibility 3'}, 
+                {'title':'Job Title 2', 'dates':'Time-Time', 'company':'Company', 'location':'Location', 'responsibilities':'Responsibility 1, Responsibility 2, Responsibility 3'}]))
+        tex_file.write(skills(['skill 1', 'skill 2', 'skill 3']))
         tex_file.write('\\end{document}')
 
     
@@ -301,6 +299,7 @@ def build_latex_text():
     %------------------------------------------------------------------------------
     % CV STARTS HERE  %
     %------------------------------------------------------------------------------
+
     \begin{document}
 
     '''
@@ -327,8 +326,7 @@ def convert_to_pdf():
     os.unlink('resume.log')
     os.unlink('resume.aux')
 
-    
-    # pdf = build_pdf('resume.tex')
+    # pdf = build_pdf('CV.tex')
     # pdf.save_to('resume.pdf')
 
 
