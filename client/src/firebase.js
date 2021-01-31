@@ -37,7 +37,7 @@ const signInWithGoogle = () => auth.signInWithPopup(provider).then((result) => {
   var token = credential.accessToken;
   // The signed-in user info.
   var user = result.user;
-  window.location.replace("/resume");
+  window.location.replace("/careerpath");
   // ...
 }).catch((error) => {
   // Handle Errors here.

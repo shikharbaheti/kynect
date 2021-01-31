@@ -93,11 +93,11 @@ export default function SignIn() {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-                        >
+                    >
                         Sign In
           </Button>
-          <Button type="button" fullWidth variant="contained" onClick = {signInWithGoogle} color="secondary">
-  Sign In with google
+                    <Button type="button" fullWidth variant="contained" onClick={signInWithGoogle} color="secondary">
+                        Sign In with google
 </Button>
                     <Grid container>
                         <Grid item xs>

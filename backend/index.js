@@ -3,17 +3,6 @@ const app = express();
 const axios = require('axios');
 const querystring = require('querystring');
 
-
-// LINKEDIN API
-LinkClientID = "86e1sthxzjxo1u"
-LinkClientSecret = "1C9G59hmnXZdYdAH"
-
-url1 = "https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&client_id=" + LinkClientID + "&client_secret=" + LinkClientSecret + "&code=AQTuhyjgFOsM44ERhNUrXeVYwKzPLFU8fFArQzrfjtW-UR2ulBM9Hhu1GLJqf5LODx7jRyf7_ocriMiDVtH9uPG_tRRe0B3hx5YZnP5b28gwbD-ioUaYQIeXZTFp_qGjyU5fO4xPrKPSHPxMmCjOLz1vOgkywOTrLYGLz4wWqIi8qOg0FuVEonWGh4pQ2A&redirect_uri=http://localhost:3001"
-
-url2 = "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=" + LinkClientID + "&scope=r_liteprofile&state=123456&redirect_uri=http://localhost:8080/callback"
-
-console.log(url2)
-
 // axios.post('https://www.linkedin.com/oauth/v2/accessToken', querystring.stringify({
 //     // auth: {
 
@@ -66,35 +55,11 @@ console.log(url2)
 //     console.error(err);
 // });
 
+// app.use(express.static('public')); /* this line tells Express to use the public folder as our static folder from which we can serve static files*/
 
-axios.get('https://www.linkedin.com/oauth/v2/authorization', {
-    params: {
-        response_type: "code",
-        client_id: LinkClientID,
-        redirect_uri: "http://localhost:8080",
-        state: "DCEeFWf43A53sd8Kef424",
-        scope: "r_liteprofile%20r_emailaddress%20w_member_social",
-    }
-})
-    .then(function (response) {
-        console.log(response);
-    })
-    .catch(err => {
-        console.error(err);
-    });
-
-const accessToken = 'YOUR_ACCESS_TOKEN';
-const options = {
-    host: 'api.linkedin.com',
-    path: '/v2/me',
-    method: 'GET',
-    headers: {
-        'Authorization': `Bearer ${accessToken}`,
-        'cache-control': 'no-cache',
-        'X-Restli-Protocol-Version': '2.0.0'
-    }
-};
-
+app.get("/jobSearch", (req, res) => {
+    res.sendFile(__dirname + '/results.xls');
+});
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
