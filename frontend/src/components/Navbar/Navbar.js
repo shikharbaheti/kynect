@@ -8,6 +8,7 @@ function NavBar() {
                 <Nav className="mr-auto">
                     <Nav.Link href="/login">Login</Nav.Link>
                     <Nav.Link href="/jobs">Jobs</Nav.Link>
+                    <Nav.Link href="/home">Home</Nav.Link>
                 </Nav>
             </Navbar>
         </div>

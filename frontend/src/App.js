@@ -10,6 +10,7 @@ import Landing from './components/Landing/Landing';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import ErrorPage from './components/ErrorPage/ErrorPage';
+import Home from './components/Home/Home';
 
 
 function App() {
@@ -27,6 +28,9 @@ function App() {
             </Route>
             <Route exact path="/login">
               <Login />
+            </Route>
+            <Route exact path="/home">
+              <Home />
             </Route>
             <Route component={ErrorPage} />
           </Switch>
