@@ -1,0 +1,9 @@
+
+.logo{
+    display: flex;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    border: 3px solid black; 
+}
