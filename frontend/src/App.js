@@ -1,5 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,6 +10,7 @@ import Landing from './components/Landing/Landing';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import ErrorPage from './components/ErrorPage/ErrorPage';
+
 
 function App() {
   return (
