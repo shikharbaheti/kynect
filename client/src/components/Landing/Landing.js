@@ -1,10 +1,14 @@
+import logo from '../../images/Transparent.png'
+
 function Landing() {
     return (
-        <div className="Landing">
-            <div className="main-banner text-center">
-                <h1 className="display-1">Kynect</h1>
-                <h2>Connecting people to professions.</h2>
+        <div className="Landing text-center">
+            <div>
+            <h1>
+            <img src={logo} class = 'logo'/>
+            </h1>    
             </div>
+            
         </div>
     );
 }
