@@ -6,11 +6,13 @@ def header(header_map):
     \textbf{\Huge \scshape ''' + header_map.get('name') + r'''} \\ \vspace{1pt} %\scshape sets small capital letters, remove if desired
     \small $|$ '''+ header_map.get('phone_number') + r''' $|$ 
     \href{mailto:''' + header_map.get('email')+ r'''}{\underline{''' + header_map.get('email') +r'''}} $|$ 
-    % Be sure to use a professional *personal* email address
+    % Be sure to use a professional *personal* email address 
     ''' 
     for key in header_map.keys():
-        if key != "name" and key != "phone_number" and key != "email":
-            latex += "{"+ header_map.get(key) + "} $|$"
+        if key != "name" and key != "phone_number" and key != "email" and key != "address":
+            latex += "{"+ header_map.get(key) + "} $|$ "
+
+    latex += "\n{"+ header_map.get('address') + "} \n"
 
     latex += "\end{center}"
     return latex
@@ -48,7 +50,7 @@ def work_experience(work_exp_list):
             \CVItemListStart'''
         for i in range(3):
             latex += r'''\CVItem{'''+entry[i]+r'''}'''
-        latex += '\CVItemListEnd'
+        latex += '\CVItemListEnd \CVSubHeadingListEnd'
 
     return latex
 
@@ -181,8 +183,8 @@ def build_latex():
         \begin{document}
 
         ''')
-        tex_file.write(header({'name': 'Leah Tomotaki', 'phone_number':'214-471-9565', 'email':'leah.tomotaki@tamu.edu', 'linkedin': 'linkedin'}))
-        tex_file.write(education([['Bachelors of Science', '2018-2022', 'Texas A&M University', 'College Station', 'Computer Science']]))
+        tex_file.write(header({'name': 'Leah Tomotaki', 'phone_number':'214-471-9565', 'email':'leah.tomotaki@tamu.edu', 'linkedin': 'linkedin', 'address': '123 address st., College Station, TX, 77840'}))
+        tex_file.write(education([['Bachelors of Science', '2018-2022', 'Texas AM University', 'College Station', 'Computer Science']]))
         tex_file.write(work_experience([['Job Title', 'Time-Time', 'Company', 'Location', 'Responsibility 1', 'Responsibility 2', 'Responsibility 3']]))
         tex_file.write(skills({'skill 1': 'details about skill 1', 'skill 2': 'details about skill 2'}))
         tex_file.write('\\end{document}')
@@ -302,9 +304,33 @@ def build_latex_text():
     \begin{document}
 
     '''
-    latex += header({'name': 'Leah Tomotaki', 'phone_number':'214-471-9565', 'email':'leah.tomotaki@tamu.edu', 'linkedin': 'linkedin'})
-    latex += education([['Bachelors of Science', '2018-2022', 'Texas A&M University', 'College Station', 'Computer Science']])
+    latex += header({'name': 'Leah Tomotaki', 'phone_number':'214-471-9565', 'email':'leah.tomotaki@tamu.edu', 'linkedin': 'linkedin', 'address':'123 address st., College Station, TX 77840'})
+    latex += education([['Bachelors of Science', '2018-2022', 'Texas AM University', 'College Station', 'Computer Science']])
     latex += work_experience([['Job Title', 'Time-Time', 'Company', 'Location', 'Responsibility 1', 'Responsibility 2', 'Responsibility 3']])
     latex += skills({'skill 1': 'details about skill 1', 'skill 2': 'details about skill 2'})
     latex += '\\end{document}'
     return latex
+
+from latex import build_pdf
+from pdflatex import PDFLaTeX
+import subprocess
+import os
+
+def convert_to_pdf():    
+    # pdfl = PDFLaTeX.from_texfile('resume.tex')
+    # pdf, log, completed_process = pdfl.create_pdf(keep_pdf_file=True, keep_log_file=True)
+
+    proc=subprocess.Popen(['pdflatex','resume.tex'])
+    proc.communicate()
+    os.startfile('resume.pdf')
+    #os.unlink('%s.tex'%name)
+    os.unlink('resume.log')
+    os.unlink('resume.aux')
+
+    
+    # pdf = build_pdf('resume.tex')
+    # pdf.save_to('resume.pdf')
+
+
+build_latex()
+convert_to_pdf()
