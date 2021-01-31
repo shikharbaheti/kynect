@@ -20,7 +20,7 @@ import ErrorPage from './components/ErrorPage/ErrorPage';
 import Builder from './components/Builder/Builder';
 import Resume from './components/Resume/resume';
 import CareerPath from './components/CareerPath/CareerPath';
-
+import Jobs from './components/Jobs/Jobs';
 
 function App() {
   return (
@@ -43,6 +43,9 @@ function App() {
             </Route>
             <Route exact path="/login">
               <Login />
+            </Route>
+            <Route exact path="/jobs">
+              <Jobs />
             </Route>
             <Route exact path="/careerpath">
               <CareerPath />
