@@ -13,6 +13,7 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import Builder from './components/Builder/Builder';
+import Resume from './components/Resume/resume';
 
 function App() {
   return (
@@ -29,6 +30,9 @@ function App() {
             </Route>
             <Route exact path="/builder">
               <Builder />
+            </Route>
+            <Route exact path="/resume">
+              <Resume />
             </Route>
             <Route exact path="/login">
               <Login />
