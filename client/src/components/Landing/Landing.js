@@ -1,18 +1,14 @@
-import './Landing.css';
-import { Container } from "react-bootstrap";
-import FadeIn from 'react-fade-in';
+import logo from '../../images/Transparent.png'
 
 function Landing() {
     return (
-        <div className="Landing">
-            <FadeIn>
-                <Container>
-                    <div className="main-banner text-center">
-                        <h1 className="display-1">Kynect</h1>
-                        <h2>Connecting people to professions.</h2>
-                    </div>
-                </Container>
-            </FadeIn>
+        <div className="Landing text-center">
+            <div>
+                <h1>
+                    <img src={logo} class='logo' alt="banner" />
+                </h1>
+            </div>
+
         </div>
     );
 }

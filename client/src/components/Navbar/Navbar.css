@@ -1,3 +1,9 @@
-.Navbar {
-    color: orange;
+.navlogo{
+
+  padding: 0px;
+  margin: 0px;
+  text-align: center;
+  display:inline-block;
+  vertical-align:top;
+  
 }
